@@ -1,0 +1,91 @@
+{
+  "kind": "youtube#videoListResponse",
+  "etag": "DbAm6T9g4v2MYEiS7YzlvUHq1YA",
+  "items": [
+    {
+      "kind": "youtube#video",
+      "etag": "Uoa4Ay5NuQ5AAdlKYodRXHYlQr0",
+      "id": "7Ru1saTPWSw",
+      "snippet": {
+        "publishedAt": "2023-10-17T08:00:02Z",
+        "channelId": "UCSGC87iX0QhnIfUOI_B_Rdg",
+        "title": "[Playlist] 가을 향 가득한 데일리팝 | autumn daily pop",
+        "description": "Playlist by toyou (벅스 뮤직PD)\n\n*벅스에서 플레이리스트를 확인해보세요!\n::  http://bugs.kr/!yt59505\n\n*toyou님의 감성이 내 취향이라면!\n::  http://bugs.kr/!yt59505pd\n\nbetter music, better mood\n\n삼성 TV 플러스에서도 essential;을 만나보세요 \n24시간 중 어느 때나 TV만 틀어놓으면,\n공간의 무드는 essential;이 만들어드릴게요✨\n\n삼성 TV 플러스 essential; by Bugs\n✔채널번호 526\n\n#가을 #카페 #감성적인 #음악 #플레이리스트 #팝송",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/7Ru1saTPWSw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/7Ru1saTPWSw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/7Ru1saTPWSw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/7Ru1saTPWSw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/7Ru1saTPWSw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "essential;",
+        "tags": [
+          "essential",
+          "에센셜",
+          "플레이리스트",
+          "playlist",
+          "노래",
+          "팝송",
+          "음악",
+          "이센셜",
+          "추천",
+          "플리",
+          "가을 노래",
+          "가을 팝송",
+          "선선한",
+          "가을",
+          "감성적인",
+          "감성적인 노래",
+          "감성적인 팝송",
+          "벅스",
+          "벅스뮤직",
+          "essential playlist",
+          "에센셜 플레이리스트",
+          "가을에 듣기 좋은 노래",
+          "essential 가을",
+          "에센셜 가을",
+          "팝송 플레이리스트",
+          "카페 음악",
+          "가을 플레이리스트",
+          "가을노래",
+          "essential 카페",
+          "카페노래",
+          "감성팝송",
+          "감성노래",
+          "저녁에 듣기 좋은 음악"
+        ],
+        "categoryId": "10",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "[Playlist] 가을 향 가득한 데일리팝 | autumn daily pop",
+          "description": "Playlist by toyou (벅스 뮤직PD)\n\n*벅스에서 플레이리스트를 확인해보세요!\n::  http://bugs.kr/!yt59505\n\n*toyou님의 감성이 내 취향이라면!\n::  http://bugs.kr/!yt59505pd\n\nbetter music, better mood\n\n삼성 TV 플러스에서도 essential;을 만나보세요 \n24시간 중 어느 때나 TV만 틀어놓으면,\n공간의 무드는 essential;이 만들어드릴게요✨\n\n삼성 TV 플러스 essential; by Bugs\n✔채널번호 526\n\n#가을 #카페 #감성적인 #음악 #플레이리스트 #팝송"
+        },
+        "defaultAudioLanguage": "ko"
+      }
+    }
+  ],
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 1
+  }
+}
