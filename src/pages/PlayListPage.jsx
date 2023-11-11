@@ -4,8 +4,8 @@ import YoutubeIframe from '../components/YoutubeIframe';
 
 const PlayListPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { playlist } = useParams();
   const [musicItem, setMusicItem] = useState(searchParams.get('musicId'));
+  const { playlist, musicId } = useParams();
   const [playItemList, setPlayItemList] = useState([]);
   useEffect(() => {
     const getList = localStorage.getItem('youtubePlaylist');
@@ -18,7 +18,11 @@ const PlayListPage = () => {
 
   return (
     <>
-      <YoutubeIframe musicItem={musicItem} />
+      <YoutubeIframe
+        playlist={playlist}
+        musicItem={musicId}
+        list={playItemList?.musicList}
+      />
       <div>
         <ul>
           {playItemList?.musicList?.map((music, musicIdx) => (

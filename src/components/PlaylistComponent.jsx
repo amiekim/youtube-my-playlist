@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { YoutubeApis } from '../api/youtube';
@@ -27,9 +27,6 @@ const PlaylistComponent = (props) => {
         id: '',
       });
   };
-  const handleEditItem = (music, musicIdx) => {
-    setMusicId({ display: true, listSeq: musicIdx, id: music.id });
-  };
   const handleSaveItem = async () => {
     const fakeData = new YoutubeApis();
     const getIdInfo = await fakeData.youtubeItemDetail(musicId.id);
@@ -57,7 +54,56 @@ const PlaylistComponent = (props) => {
       localStorage.setItem('youtubePlaylist', JSON.stringify([...tempList]));
     }
   };
+  const handleDown = (e) => {
+    let tempMusicList = [];
+    let tempListSeq =
+      Number(e.target.dataset.listseq) > -1 && Number(e.target.dataset.listseq);
+    let tempitemSeq =
+      Number(e.target.dataset.itemseq) > -1
+        ? Number(e.target.dataset.itemseq)
+        : -1;
 
+    if (tempListSeq > -1) {
+      tempMusicList = list[tempListSeq].musicList;
+      if (tempitemSeq > -1 && tempitemSeq + 1 < tempMusicList.length) {
+        const tempItem = { ...tempMusicList[tempitemSeq + 1] };
+        const tempList = list;
+        tempList.musicList = tempMusicList.splice(
+          tempitemSeq + 1,
+          1,
+          tempMusicList[tempitemSeq]
+        );
+        tempList.musicList = tempMusicList.splice(tempitemSeq, 1, tempItem);
+        setList([...tempList]);
+        localStorage.setItem('youtubePlaylist', JSON.stringify([...tempList]));
+      }
+    }
+  };
+  const handleUp = (e) => {
+    let tempMusicList = [];
+    let tempListSeq =
+      Number(e.target.dataset.listseq) > -1 && Number(e.target.dataset.listseq);
+    let tempitemSeq =
+      Number(e.target.dataset.itemseq) > -1
+        ? Number(e.target.dataset.itemseq)
+        : -1;
+
+    if (tempListSeq > -1) {
+      tempMusicList = list[tempListSeq].musicList;
+      if (tempitemSeq > 0) {
+        const tempItem = { ...tempMusicList[tempitemSeq - 1] };
+        const tempList = list;
+        tempList.musicList = tempMusicList.splice(
+          tempitemSeq - 1,
+          1,
+          tempMusicList[tempitemSeq]
+        );
+        tempList.musicList = tempMusicList.splice(tempitemSeq, 1, tempItem);
+        setList([...tempList]);
+        localStorage.setItem('youtubePlaylist', JSON.stringify([...tempList]));
+      }
+    }
+  };
   useEffect(() => {
     const isPlaylist = localStorage.getItem('youtubePlaylist')
       ? JSON.parse(localStorage.getItem('youtubePlaylist'))
@@ -73,9 +119,7 @@ const PlaylistComponent = (props) => {
             style={{ cursor: 'pointer' }}
             onClick={() => {
               if (item?.musicList?.length > 0 && item?.musicList[0].id) {
-                navigate(
-                  `/playlist/${item.title}?musicId=${item.musicList[0].id}`
-                );
+                navigate(`/playlist/${item.title}/${item.musicList[0].id}`);
               }
             }}
           >
@@ -86,10 +130,24 @@ const PlaylistComponent = (props) => {
               <li key={`music-${musicIdx}`}>
                 <div>{music.title}</div>
                 <button
-                  id={`item-edit-${musicIdx}`}
-                  onClick={() => handleEditItem(music, musicIdx)}
+                  data-listseq={idx}
+                  data-itemid={music.id}
+                  data-itemseq={musicIdx}
+                  id={`item-up-${musicIdx}`}
+                  disabled={musicIdx < 1}
+                  onClick={handleUp}
                 >
-                  edit
+                  up
+                </button>
+                <button
+                  data-listseq={idx}
+                  data-itemid={music.id}
+                  data-itemseq={musicIdx}
+                  id={`item-down-${musicIdx}`}
+                  disabled={musicIdx + 1 >= item.musicList.length}
+                  onClick={handleDown}
+                >
+                  down
                 </button>
                 <button
                   id={`item-del-${musicIdx}`}
@@ -117,7 +175,7 @@ const PlaylistComponent = (props) => {
               </div>
             )}
             <button id={`item-add-${idx}`} onClick={handleAddItem}>
-              {musicId.display ? '닫기' : '추가'}
+              {musicId.display && musicId.listSeq == idx ? '닫기' : '추가'}
             </button>
           </ul>
         </div>

@@ -21,29 +21,27 @@ const Home = () => {
     <>
       {/* 최신 yarn을 사용하면 모든 패키지들이 노드모듈로 들어오지 않아서 자동
       임포트가 안되기도 한다. */}
-      <QueryClientProvider client={queryClient}>
-        <Header />
-        <section>
-          <PlaylistForm
-            title={title}
-            setTitle={setTitle}
-            keywords={keywords}
-            setKeywords={setKeywords}
-            list={list}
-            setList={setList}
-          />
-        </section>
+      <Header />
+      <section>
+        <PlaylistForm
+          title={title}
+          setTitle={setTitle}
+          keywords={keywords}
+          setKeywords={setKeywords}
+          list={list}
+          setList={setList}
+        />
+      </section>
 
-        <section>
-          <PlaylistComponent
-            list={list}
-            setList={setList}
-            musicId={musicId}
-            setMusicId={setMusicId}
-          />
-        </section>
-        <footer></footer>
-      </QueryClientProvider>
+      <section>
+        <PlaylistComponent
+          list={list}
+          setList={setList}
+          musicId={musicId}
+          setMusicId={setMusicId}
+        />
+      </section>
+      <footer></footer>
     </>
   );
 };
