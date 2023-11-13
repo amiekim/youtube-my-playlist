@@ -5,7 +5,7 @@ const Header = () => {
     <header>
       <div></div>
       <div>
-        <span>1</span>
+        {/* <span className="font-['Lobster']">Simple Playlist</span> */}
       </div>
     </header>
   );

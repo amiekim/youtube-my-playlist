@@ -18,17 +18,26 @@ const PlayListPage = () => {
 
   return (
     <>
-      <YoutubeIframe
-        playlist={playlist}
-        musicItem={musicId}
-        list={playItemList?.musicList}
-      />
-      <div>
-        <ul>
-          {playItemList?.musicList?.map((music, musicIdx) => (
-            <li key={`music-${musicIdx}`}>{music.title}</li>
-          ))}
-        </ul>
+      <div className="flex justify-center">
+        <div className="flex flex-col items-center s-mobile:w-320 mobile:w-360 tablet:w-640 laptop:w-900">
+          <div className="relative flex justify-center pt-[56.25%] h-full w-full">
+            <YoutubeIframe
+              playlist={playlist}
+              musicItem={musicId}
+              list={playItemList?.musicList}
+            />
+          </div>
+          <ul className="rounded-md p-4 my-4 shadow-lg bg-[#4649FF] bg-opacity-10 h-full w-full">
+            {playItemList?.musicList?.map((music, musicIdx) => (
+              <li
+                key={`music-${musicIdx}`}
+                className="whitespace-nowrap text-ellipsis overflow-hidden"
+              >
+                {music.title}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   );
