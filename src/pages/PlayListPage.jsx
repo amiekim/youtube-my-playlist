@@ -39,7 +39,7 @@ const PlayListPage = () => {
                   music.itemKey === musicId ? '#4649FF' : '#000'
                 }]`}
               >
-                {music.itemKey === musicId && <i class="ri-play-fill"></i>}
+                {music.itemKey === musicId && <i className="ri-play-fill"></i>}
                 {music.title}
               </li>
             ))}

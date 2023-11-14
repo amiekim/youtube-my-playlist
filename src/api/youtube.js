@@ -7,6 +7,10 @@ export class YoutubeApis {
   async youtubeItemDetail(id) {
     // return axios
     //   .get('/test.json')
+    console.log(
+      'process.env.REACT_APP_YOUTUBE_API_KEY:',
+      process.env.REACT_APP_YOUTUBE_API_KEY
+    );
     return axios
       .get(
         `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`

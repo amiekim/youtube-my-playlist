@@ -42,9 +42,7 @@ const PlaylistComponent = (props) => {
         '입력란 아래를 참조해서 유튜브 아이디를 입력해주세요.(ㆁωㆁ*)'
       );
     let aleadyIsId = {};
-    console.log(list[musicId.listSeq]);
     if (musicId.listSeq > -1 && list[musicId.listSeq]?.musicList) {
-      console.log(list[musicId.listSeq]);
       for (let i = 0; i < list[musicId.listSeq]?.musicList.length; i++) {
         if (list[musicId.listSeq].musicList[i].id === musicId.id) {
           aleadyIsId = {
@@ -58,8 +56,9 @@ const PlaylistComponent = (props) => {
     let tempId = {};
     let getIdInfo = false;
 
-    if (aleadyIsId) tempId = { ...aleadyIsId };
-    else {
+    if (aleadyIsId.length > 0) {
+      tempId = { ...aleadyIsId };
+    } else {
       tempId = { ...musicId };
       const fakeData = new YoutubeApis();
       getIdInfo = await fakeData.youtubeItemDetail(musicId.id);
