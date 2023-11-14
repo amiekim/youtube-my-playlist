@@ -12,6 +12,8 @@ const PlaylistComponent = (props) => {
   //   return fakeData.youtubeItemDetail();
   // });
   const handleAddItem = (e) => {
+    if (list.length > 5)
+      return alert('플레이리스트는 5개까지 만들 수 있어요.(ㆁωㆁ*)');
     let arrSeq = e.target.id.split('-');
     let btnSeq = arrSeq[arrSeq.length - 1];
     if (!musicId.display && Number(btnSeq) > -1) {
@@ -31,14 +33,45 @@ const PlaylistComponent = (props) => {
       });
   };
   const handleSaveItem = async () => {
-    const fakeData = new YoutubeApis();
-    const getIdInfo = await fakeData.youtubeItemDetail(musicId.id);
-    if (getIdInfo) {
-      if (musicId.listSeq != -1 && musicId.id) {
-        let temp = list;
-        temp[musicId.listSeq].musicList.push({
-          id: musicId.id,
-          title: getIdInfo.snippet.title,
+    if (!musicId || !musicId.id)
+      return alert(
+        '입력란 아래를 참조해서 유튜브 아이디를 넣어주세요.(ㆁωㆁ*)'
+      );
+    if (musicId?.id?.length > 12)
+      return alert(
+        '입력란 아래를 참조해서 유튜브 아이디를 입력해주세요.(ㆁωㆁ*)'
+      );
+    let aleadyIsId = {};
+    console.log(list[musicId.listSeq]);
+    if (musicId.listSeq > -1 && list[musicId.listSeq]?.musicList) {
+      console.log(list[musicId.listSeq]);
+      for (let i = 0; i < list[musicId.listSeq]?.musicList.length; i++) {
+        if (list[musicId.listSeq].musicList[i].id === musicId.id) {
+          aleadyIsId = {
+            ...list[musicId.listSeq].musicList[i],
+            listSeq: musicId.listSeq,
+          };
+          break;
+        }
+      }
+    }
+    let tempId = {};
+    let getIdInfo = false;
+
+    if (aleadyIsId) tempId = { ...aleadyIsId };
+    else {
+      tempId = { ...musicId };
+      const fakeData = new YoutubeApis();
+      getIdInfo = await fakeData.youtubeItemDetail(musicId.id);
+    }
+
+    if (aleadyIsId || getIdInfo) {
+      if (tempId.listSeq != -1 && tempId.id) {
+        let temp = [...list];
+        temp[tempId.listSeq].musicList.push({
+          itemKey: Math.floor(Math.random() * 1000) + '--' + tempId.id,
+          id: tempId.id,
+          title: aleadyIsId?.title || getIdInfo.snippet.title,
         });
         setList([...temp]);
         setMusicId({ display: false, listSeq: -1, id: '' });
@@ -46,7 +79,7 @@ const PlaylistComponent = (props) => {
         window.localStorage.setItem('youtubePlaylist', listTojson);
       }
     } else {
-      alert('유튜브 아이디를 v=값을 확인해주세요.');
+      alert('유튜브 아이디를 v=값을 확인해주세요.(ㆁωㆁ*)');
     }
   };
   const handleDelItem = (e) => {
@@ -143,6 +176,15 @@ const PlaylistComponent = (props) => {
       }
     }
   };
+  const goPlaylist = (item) => {
+    if (item?.musicList?.length > 0 && item?.musicList[0].id) {
+      navigate(
+        `/playlist/${item.regDate + '-' + item.playlistKey}/${
+          item.musicList[0].itemKey
+        }`
+      );
+    }
+  };
   useEffect(() => {
     const isPlaylist = localStorage.getItem('youtubePlaylist')
       ? JSON.parse(localStorage.getItem('youtubePlaylist'))
@@ -159,11 +201,7 @@ const PlaylistComponent = (props) => {
         >
           <p
             className="cursor-pointer font-bold text-2xl text-[#4649FF]"
-            onClick={() => {
-              if (item?.musicList?.length > 0 && item?.musicList[0].id) {
-                navigate(`/playlist/${item.title}/${item.musicList[0].id}`);
-              }
-            }}
+            onClick={() => goPlaylist(item)}
           >
             {item.title}
           </p>
@@ -221,17 +259,19 @@ const PlaylistComponent = (props) => {
               <div>
                 <div className="flex mt-5 my-2 justify-between">
                   <input
+                    id="input-save"
                     className="grow rounded-md p-2 mr-2 shadow-lg placeholder-gray-500"
                     type="text"
                     value={musicId.id}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setMusicId({
                         ...musicId,
                         id: e.target.value,
-                      })
-                    }
+                      });
+                    }}
                   />
                   <button
+                    id="btn-save-item"
                     className="w-fit rounded-md p-2 shadow-lg text-[#4649FF]"
                     onClick={handleSaveItem}
                   >

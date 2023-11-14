@@ -3,6 +3,8 @@ import Header from '../components/Header';
 import { Form } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import PlaylistComponent from '../components/PlaylistComponent';
+import { XSSCheck } from '../util/functions';
+import dayjs from 'dayjs';
 
 const Home = () => {
   // Create a client
@@ -18,8 +20,21 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const tempTitle = XSSCheck(title || '');
+    if (!title) return alert('플레이리스트 이름을 정해주세요.(ㆁωㆁ*)');
+
     keywords.split();
-    setList([...list, { title, musicList: [], keywords }]);
+    setList([
+      ...list,
+      {
+        regDate: dayjs().format('YYMMDD'),
+        playlistKey: Math.floor(Math.random() * 1000),
+        title: tempTitle,
+        musicList: [],
+        keywords,
+      },
+    ]);
   };
 
   return (
