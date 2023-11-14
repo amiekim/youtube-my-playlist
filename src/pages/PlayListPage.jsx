@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import YoutubeIframe from '../components/YoutubeIframe';
 
 const PlayListPage = () => {
   const navigate = useNavigate();
-  const { playlist, musicId } = useParams();
+  // const { playlist, musicId } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const playlist = searchParams.get('playlist');
+  const musicId = searchParams.get('musicId');
+
   const [playItemList, setPlayItemList] = useState([]);
   const [musicKey, setMusicKey] = useState('');
 
@@ -19,12 +23,10 @@ const PlayListPage = () => {
       playItemList?.musicList.length - 1 > currentIndex
     ) {
       navigate(
-        `/playlist/${playlist}/${
+        `/playlist?playlist=${playlist}&musicId=${
           playItemList?.musicList[currentIndex + 1].itemKey
         }`
       );
-      // reload
-      // navigate(0);
     }
   };
 
@@ -37,10 +39,12 @@ const PlayListPage = () => {
     if (isThisPlaylist?.length > 0) {
       setPlayItemList(isThisPlaylist[0]);
     }
+  }, []);
+  useEffect(() => {
     if (musicId?.includes('--')) {
       setMusicKey(musicId.split('--')[1]);
     }
-  }, []);
+  }, [musicId]);
 
   return (
     <>
@@ -50,7 +54,7 @@ const PlayListPage = () => {
             goNext={goNext}
             musicKey={musicKey}
             youtubeRef={youtubeRef}
-            // list={playItemList?.musicList}
+            list={playItemList?.musicList}
           />
           <ul className="cursor-pointer rounded-md p-4 my-4 shadow-lg bg-[#4649FF] bg-opacity-10 h-full w-full">
             {playItemList?.musicList?.map((music, musicIdx) => (
@@ -62,8 +66,9 @@ const PlayListPage = () => {
                 onClick={() => {
                   if (youtubeRef?.current) {
                     youtubeRef.current.internalPlayer?.pauseVideo();
-                    navigate(`/playlist/${playlist}/${music.itemKey}`);
-                    // navigate(0);
+                    navigate(
+                      `/playlist?playlist=${playlist}&musicId=${music.itemKey}`
+                    );
                   }
                 }}
               >

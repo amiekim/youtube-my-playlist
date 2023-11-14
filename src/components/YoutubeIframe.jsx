@@ -2,7 +2,7 @@ import React from 'react';
 import YouTube from 'react-youtube';
 
 const YoutubeIframe = (props) => {
-  const { youtubeRef, musicKey, goNext } = props;
+  const { list, youtubeRef, musicKey, goNext } = props;
 
   const opts = {
     height: '100%',
@@ -11,10 +11,13 @@ const YoutubeIframe = (props) => {
       autoplay: 1,
     },
   };
-  // w-320 mobile:w-360 tablet:w-640 laptop:w-900
-  // 0.5625
-  // 16:9
   const onReady = (event) => {
+    // event.target.cuePlaylist(
+    //   list.map((i) => i.id),
+    //   0,
+    //   0,
+    //   null
+    // );
     event.target.pauseVideo();
   };
   const onPlayerStateChange = (event) => {
@@ -28,11 +31,23 @@ const YoutubeIframe = (props) => {
       <YouTube
         ref={youtubeRef}
         className="absolute top-0 left-0x h-full w-full"
+        key={musicKey}
         videoId={musicKey}
         opts={opts}
         onReady={onReady}
         onStateChange={onPlayerStateChange}
       />
+      {/* <button
+        className="absolute top-[500px]"
+        onClick={async () => {
+          console.log('e:', youtubeRef.current.internalPlayer);
+          let testResult =
+            await youtubeRef.current.internalPlayer.getPlaylist();
+          console.log('testResult:', testResult);
+        }}
+      >
+        테스트 버튼
+      </button> */}
     </div>
   );
 };

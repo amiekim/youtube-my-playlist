@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/playlist/:playlist/:musicId',
+    path: '/playlist',
     element: <PlayListPage />,
   },
 ]);

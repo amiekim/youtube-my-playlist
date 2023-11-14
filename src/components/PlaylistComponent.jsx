@@ -177,7 +177,7 @@ const PlaylistComponent = (props) => {
   const goPlaylist = (item) => {
     if (item?.musicList?.length > 0 && item?.musicList[0].id) {
       navigate(
-        `/playlist/${item.regDate + '-' + item.playlistKey}/${
+        `/playlist?playlist=${item.regDate + '-' + item.playlistKey}&musicId=${
           item.musicList[0].itemKey
         }`
       );
