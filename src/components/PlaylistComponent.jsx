@@ -63,8 +63,7 @@ const PlaylistComponent = (props) => {
       const fakeData = new YoutubeApis();
       getIdInfo = await fakeData.youtubeItemDetail(musicId.id);
     }
-
-    if (aleadyIsId || getIdInfo) {
+    if ((aleadyIsId && aleadyIsId.id) || getIdInfo) {
       if (tempId.listSeq != -1 && tempId.id) {
         let temp = [...list];
         temp[tempId.listSeq].musicList.push({
