@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import YoutubeIframe from '../components/YoutubeIframe';
 
@@ -8,6 +8,8 @@ const PlayListPage = () => {
   const [playItemList, setPlayItemList] = useState([]);
   const [musicKey, setMusicKey] = useState('');
 
+  const youtubeRef = useRef();
+
   const goNext = () => {
     const currentIndex = playItemList?.musicList.findIndex(
       (f) => f.id == musicKey
@@ -16,9 +18,13 @@ const PlayListPage = () => {
       currentIndex > -1 &&
       playItemList?.musicList.length - 1 > currentIndex
     ) {
-      window.location = `/playlist/${playlist}/${
-        playItemList?.musicList[currentIndex + 1].itemKey
-      }`;
+      navigate(
+        `/playlist/${playlist}/${
+          playItemList?.musicList[currentIndex + 1].itemKey
+        }`
+      );
+      // reload
+      navigate(0);
     }
   };
 
@@ -40,14 +46,13 @@ const PlayListPage = () => {
     <>
       <div className="flex justify-center">
         <div className="flex flex-col items-center s-mobile:w-320 mobile:w-360 tablet:w-640 laptop:w-900">
-          <div className="relative flex justify-center pt-[56.25%] h-full w-full">
-            <YoutubeIframe
-              goNext={goNext}
-              musicKey={musicKey}
-              // list={playItemList?.musicList}
-            />
-          </div>
-          <ul className="rounded-md p-4 my-4 shadow-lg bg-[#4649FF] bg-opacity-10 h-full w-full">
+          <YoutubeIframe
+            goNext={goNext}
+            musicKey={musicKey}
+            youtubeRef={youtubeRef}
+            // list={playItemList?.musicList}
+          />
+          <ul className="cursor-pointer rounded-md p-4 my-4 shadow-lg bg-[#4649FF] bg-opacity-10 h-full w-full">
             {playItemList?.musicList?.map((music, musicIdx) => (
               <li
                 key={`music-${musicIdx}`}
@@ -55,7 +60,11 @@ const PlayListPage = () => {
                   music.itemKey === musicId ? '#4649FF' : '#000'
                 }]`}
                 onClick={() => {
-                  window.location = `/playlist/${playlist}/${music.itemKey}`;
+                  if (youtubeRef?.current) {
+                    youtubeRef.current.internalPlayer?.pauseVideo();
+                    navigate(`/playlist/${playlist}/${music.itemKey}`);
+                    navigate(0);
+                  }
                 }}
               >
                 {music.itemKey === musicId && <i className="ri-play-fill"></i>}
