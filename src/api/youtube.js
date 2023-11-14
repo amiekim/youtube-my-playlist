@@ -9,7 +9,7 @@ export class YoutubeApis {
     //   .get('/test.json')
     return axios
       .get(
-        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&key=AIzaSyBdoBZIu-dc8wWTieC-ZgckSbisuXhuhX0`
+        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`
       )
       .then(async (response) => {
         if (response.data?.items[0]?.id === id) return response.data.items[0];
