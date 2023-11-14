@@ -16,11 +16,9 @@ const PlayListPage = () => {
       currentIndex > -1 &&
       playItemList?.musicList.length - 1 > currentIndex
     ) {
-      navigate(
-        `/playlist/${playlist}/${
-          playItemList?.musicList[currentIndex + 1].itemKey
-        }`
-      );
+      window.location = `/playlist/${playlist}/${
+        playItemList?.musicList[currentIndex + 1].itemKey
+      }`;
     }
   };
 
