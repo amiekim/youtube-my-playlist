@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import YouTube from 'react-youtube';
 
 const YoutubeIframe = (props) => {
@@ -18,7 +18,8 @@ const YoutubeIframe = (props) => {
     //   0,
     //   null
     // );
-    event.target.pauseVideo();
+    // event.target.pauseVideo();
+    event.target.playVideo();
   };
   const onPlayerStateChange = (event) => {
     if (event?.data === 0) {
