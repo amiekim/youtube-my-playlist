@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import YoutubeIframe from '../components/YoutubeIframe';
+import Header from '../components/Header';
 
 const PlayListPage = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const PlayListPage = () => {
 
   return (
     <>
+      <Header />
       <div className="flex justify-center">
         <div className="flex flex-col items-center s-mobile:w-320 mobile:w-360 tablet:w-640 laptop:w-900">
           <YoutubeIframe
@@ -56,7 +58,11 @@ const PlayListPage = () => {
             youtubeRef={youtubeRef}
             list={playItemList?.musicList}
           />
+
           <ul className="cursor-pointer rounded-md p-4 my-4 shadow-lg bg-[#4649FF] bg-opacity-10 h-full w-full">
+            <p className="pb-3 bold text-[#1D1CE5] text-xl">
+              {playItemList?.title || ''}
+            </p>
             {playItemList?.musicList?.map((music, musicIdx) => (
               <li
                 key={`music-${musicIdx}`}

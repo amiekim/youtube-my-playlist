@@ -41,7 +41,6 @@ const Home = () => {
     <>
       {/* 최신 yarn을 사용하면 모든 패키지들이 노드모듈로 들어오지 않아서 자동
       임포트가 안되기도 한다. */}
-      <Header />
       <main className="flex justify-center">
         <div className="s-mobile:w-320 mobile:w-360 tablet:w-640 laptop:w-900 flex flex-col">
           <p className="text-center font-['Lobster'] text-5xl tablet:text-7xl py-5 bg-gradient-to-r from-[#1D1CE5] via-[#7978FF] to-[#C47AFF] text-transparent inline-block text-transparent bg-clip-text">

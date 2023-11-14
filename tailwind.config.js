@@ -12,15 +12,9 @@ module.exports = {
     },
     fontFamily: {
       sans: ['"Noto Sans KR"', 'sans-serif'],
-      serif: [],
-      mono: [],
-      display: [],
       body: ['Noto Sans KR', 'sans-serif'],
     },
     extend: {
-      padding: {
-        '5625per': '56.25%',
-      },
       width: {
         320: '320px',
         360: '360px',

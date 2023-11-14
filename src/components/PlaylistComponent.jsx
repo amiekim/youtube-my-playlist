@@ -32,6 +32,15 @@ const PlaylistComponent = (props) => {
         id: '',
       });
   };
+  const handleDelList = (e) => {
+    let listseq = e.target.dataset.listseq;
+    if (Number(listseq) > -1) {
+      const tempList = list.filter((f, fIdx) => fIdx != listseq);
+      setList([...tempList]);
+      const listTojson = JSON.stringify(tempList);
+      window.localStorage.setItem('youtubePlaylist', listTojson);
+    }
+  };
   const handleSaveItem = async () => {
     if (!musicId || !musicId.id)
       return alert(
@@ -197,12 +206,22 @@ const PlaylistComponent = (props) => {
           key={`${item.title}-${idx}`}
           className="rounded-md p-4 my-4 shadow-lg bg-[#4649FF] bg-opacity-10"
         >
-          <p
-            className="cursor-pointer font-bold text-2xl text-[#4649FF]"
-            onClick={() => goPlaylist(item)}
-          >
-            {item.title}
-          </p>
+          <div className="flex justify-between pb-3">
+            <p
+              className="cursor-pointer font-bold text-2xl text-[#4649FF]"
+              onClick={() => goPlaylist(item)}
+            >
+              {item.title}
+            </p>
+            <button
+              id={`item-add-${idx}`}
+              data-listseq={idx}
+              onClick={handleDelList}
+              className="rounded-md shadow-lg p-1 text-[#C47AFF] text-[10px]"
+            >
+              플레이리스트 삭제
+            </button>
+          </div>
           <ul>
             {item?.musicList?.map((music, musicIdx) => (
               <li
@@ -255,10 +274,10 @@ const PlaylistComponent = (props) => {
             ))}
             {musicId.display && musicId.listSeq == idx && (
               <div>
-                <div className="flex mt-5 my-2 justify-between">
+                <div className="grid grid-cols-4 tablet:grid-cols-6 laptop:grid-cols-9 gap-3 laptop:gap-6 mt-5 my-2 justify-between">
                   <input
                     id="input-save"
-                    className="grow rounded-md p-2 mr-2 shadow-lg placeholder-gray-500"
+                    className="col-span-3 tablet:col-span-5 laptop:col-span-8 rounded-md p-2 shadow-lg placeholder-gray-500"
                     type="text"
                     value={musicId.id}
                     onChange={(e) => {
@@ -270,7 +289,7 @@ const PlaylistComponent = (props) => {
                   />
                   <button
                     id="btn-save-item"
-                    className="w-fit rounded-md p-2 shadow-lg text-[#4649FF]"
+                    className="rounded-md p-2 shadow-lg text-[#4649FF]"
                     onClick={handleSaveItem}
                   >
                     저장
