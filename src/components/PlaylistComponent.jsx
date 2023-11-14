@@ -44,7 +44,7 @@ const PlaylistComponent = (props) => {
     let aleadyIsId = {};
     if (musicId.listSeq > -1 && list[musicId.listSeq]?.musicList) {
       for (let i = 0; i < list[musicId.listSeq]?.musicList.length; i++) {
-        if (list[musicId.listSeq].musicList[i].id === musicId.id) {
+        if (list[musicId.listSeq].musicList[i].id == musicId.id) {
           aleadyIsId = {
             ...list[musicId.listSeq].musicList[i],
             listSeq: musicId.listSeq,
@@ -56,7 +56,7 @@ const PlaylistComponent = (props) => {
     let tempId = {};
     let getIdInfo = false;
 
-    if (aleadyIsId.length > 0) {
+    if (aleadyIsId && aleadyIsId.id) {
       tempId = { ...aleadyIsId };
     } else {
       tempId = { ...musicId };

@@ -9,7 +9,7 @@ const YoutubeIframe = (props) => {
     height: '100%',
     width: '100%',
     playerVars: {
-      autoplay: 0,
+      autoplay: 1,
     },
   };
   // w-320 mobile:w-360 tablet:w-640 laptop:w-900
