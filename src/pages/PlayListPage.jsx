@@ -24,7 +24,7 @@ const PlayListPage = () => {
         }`
       );
       // reload
-      navigate(0);
+      // navigate(0);
     }
   };
 
@@ -63,7 +63,7 @@ const PlayListPage = () => {
                   if (youtubeRef?.current) {
                     youtubeRef.current.internalPlayer?.pauseVideo();
                     navigate(`/playlist/${playlist}/${music.itemKey}`);
-                    navigate(0);
+                    // navigate(0);
                   }
                 }}
               >
