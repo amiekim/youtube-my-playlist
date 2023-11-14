@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import YouTube from 'react-youtube';
 
 const YoutubeIframe = (props) => {
-  const { playlist, musicKey, list } = props;
-  const navigate = useNavigate();
+  const { musicKey, goNext } = props;
   const opts = {
     height: '100%',
     width: '100%',
@@ -20,13 +19,9 @@ const YoutubeIframe = (props) => {
   };
   const onPlayerStateChange = (event) => {
     if (event?.data === 0) {
-      const currentIndex = list.findIndex((f) => f.id == musicKey);
-      if (currentIndex > -1 && list.length - 1 > currentIndex)
-        navigate(`/playlist/${playlist}/${list[currentIndex + 1].itemKey}`);
+      goNext();
     }
   };
-
-  useEffect(() => {}, []);
 
   return (
     <YouTube
