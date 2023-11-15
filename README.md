@@ -1,74 +1,68 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+### 프로젝트
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+youtube-my-playlist
+유튜브 플레이리스트
+로그인하지 않고 광고를 보더라도 원하는 플레이리스트를 한번에 볼 수 있는 곳이 필요해서 만들었습니다.
+```
 
-## Available Scripts
+### 필요지식
 
-In the project directory, you can run:
+```
+1. React
+2. React-router-dom
+3. Youtube iframe api
+4. Youtube api
+5. TailwindCss
+6. HTML, CSS, JS
+```
 
-### `yarn start`
+###
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 설치
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. `.env 세팅`
+2. `터미널에서 yarn 명령어로 설치`
 
-### `yarn test`
+### 현재 기능 및 이용방법
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+1. 플레이리스트 제목을 입력하고 저장 버튼을 누릅니다.
+2. 플레이리스트가 생성되면 추가 버튼을 누르고 유튜브 키(주소창에 v=)을 입력합니다.
+3. 첫 화면에서 플레이리스트 삭제 및 순서 변경이 가능하며 플레이리스트 제목을 누르면 해당 플레이리스트 목록이 재생됩니다.
+4. 플레이리스트에 들어가면 플레이리스트 목록에 맞춰 재생됩니다.(재생이 끝난 후 자동으로 다음 유튜브로 넘어감)
+```
 
-### `yarn build`
+### 폴더 및 파일(파일은 상세 생략)구조
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+┌── node_modules
+├── package.json
+├── public
+├── src
+    ├── components
+    ├── api
+        └── youtube.js
+    ├── pages
+    └── util
+        ├── data.js
+        └── ...
+└── README.md
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 향후 프로젝트 계획
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+추가하려고 하고 있는 계획들
+★ 진행예정 / ○ 개발기술 탐색 후 진행
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# youtube-my-playlist
->>>>>>> f1535223ed6a989d544bc893d815f61ea5d4d223
+* favicon 추가하기
+* 재생 중인 아이템 흐르는 좌우이동 css 추가
+★ 공지사항 추가
+* 드래그앤드롭으로 유튜브 순서 배치 변경
+   └── 라이브러리 사용 아닌 자바스크립트 코트를 이용해서 만들어 볼 예정
+ ○ 브라우저에 저장된 플레이리스트 내보내기 기능
+    └── 난독화를 어떻게 해볼지 고민중
+ ○ Youtube iframe api를 보고 사용할 수 있는 기능을 가지고 함수를 개선필요
+ ○ 플레이리스트 공유기능
+```
